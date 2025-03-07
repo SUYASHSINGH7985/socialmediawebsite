@@ -1,88 +1,107 @@
-# CLI Directory Ranking Tool
+# 🚀 **CLI Directory Ranking Tool** 📁
 
-This project is a command-line tool that manages directories and ranks them based on how frequently they are accessed. The tool uses an SQLite database to store directories and their visit counts, allowing users to add, remove, query, jump to, and list directories with a ranking system.
+---
 
-## Features
+## 🔍 **Overview**
 
-- **Add Directories**: Add a directory to the database for future access.
-- **Remove Directories**: Remove a directory from the database.
-- **Query Directories**: List all directories stored in the database.
-- **Jump to Directory**: Search for a directory based on a keyword and jump to the best match, increasing its rank.
-- **List Rankings**: List all directories sorted by the number of visits (ranking).
-- **Ranking**: The tool keeps track of visit counts (ranks) for each directory, increasing the rank when accessed.
+The **CLI Directory Ranking Tool** is a powerful Python-based utility that allows you to **manage and track directories** accessed on your system. With this tool, you can effortlessly **navigate, query, and organize directories** based on their usage frequency, giving you an efficient way to manage your workflow. By utilizing **SQLite** for persistent storage and **rapidfuzz** for fuzzy search, this tool provides an intuitive way to access your most used directories with ease. 
 
-## Functions
+> **Features include**: adding, removing, searching, ranking, and viewing directory visit counts!
 
-### Utility Functions
+---
 
-- `is_valid_directory(path)`: Checks if the provided path is a valid directory.
+## ✨ **Features**
 
-### Database Functions
+### 1. **Add Directories**
+   - Easily add directories to the database for quick access.
+   - Each added directory gets initialized with a **visit count of 0**.
 
-- `init_db()`: Initializes the SQLite database and creates a table to store directory paths and their visit counts.
-- `get_connection()`: Returns a connection to the SQLite database.
-- `update_rank(directory)`: Updates the rank (visit count) of a directory in the database.
-- `get_top_directory(search_term)`: Returns the most visited directory matching a search term.
-- `list_rankings()`: Lists all directories sorted by their visit counts.
-- `get_all_directories()`: Retrieves all stored directories, sorted by the most visited.
+### 2. **Remove Directories**
+   - Remove any directory from the system database with a single command.
+   - Ensure only relevant directories are stored.
 
-### Core Functions
+### 3. **Query Stored Directories**
+   - View a complete list of all directories stored in the database.
+   - Perfect for quickly checking and managing your directory records.
 
-- `change_directory(target_directory)`: Changes to a specified directory if it's valid.
-- `add_directory(directory)`: Adds a valid directory to the database.
-- `remove_directory(directory)`: Removes a directory from the database.
-- `query_directories()`: Lists all stored directories.
-- `jump_to_directory(keyword)`: Finds and returns the best matching directory based on a keyword.
+### 4. **Jump to Directory**
+   - **Search for a directory** using a keyword.
+   - The system will find the **best match** based on its usage and **jump** to it, increasing its ranking.
+   - Fast, efficient, and powered by **fuzzy search**.
 
-### Main CLI Function
+### 5. **List Rankings**
+   - Display all directories sorted by their **visit count**.
+   - Easily identify the most frequently used directories and stay productive.
 
-- `main()`: The entry point of the CLI tool, which accepts commands such as `add`, `remove`, `query`, `jump`, and `list-rankings`.
+### 6. **Automatic Ranking System**
+   - Every time you access a directory, its **visit count is incremented**.
+   - The system **automatically ranks** directories based on the frequency of visits.
 
-## Usage
+### 7. **Persistent SQLite Database**
+   - All directory paths and their visit counts are stored in an **SQLite database**.
+   - Your data is **persisted** across sessions, ensuring continuity.
 
-### Command-Line Usage
+---
 
-The tool accepts the following commands:
+## ⚙️ **How It Works**
 
-- **add**: Add a directory to the database.
-    ```bash
-    python clitools.py add /path/to/directory/
-    ```
+The CLI Directory Ranking Tool relies on Python and SQLite to manage directories effectively. Here's how the system works:
 
-- **remove**: Remove a directory from the database.
-    ```bash
-    python clitools.py remove /path/to/directory/
-    ```
+### **Utility Functions**
 
-- **query**: List all stored directories.
-    ```bash
-    python clitools.py query
-    ```
+- **`is_valid_directory(path)`**:
+   - Verifies if the given path is a valid directory.
 
-- **jump**: Search for a directory and jump to the best match.
-    ```bash
-    python clitools.py jump keyword
-    ```
+---
 
-- **list-rankings**: List all directories sorted by the number of visits.
-    ```bash
-    python clitools.py list-rankings
-    ```
+### **Database Functions**
 
-### Example Commands
+- **`init_db()`**:
+   - Initializes the SQLite database and creates the `directories` table (if not already exists).
 
+- **`get_connection()`**:
+   - Opens and returns a connection to the SQLite database.
+
+- **`update_rank(directory)`**:
+   - Increases the visit count for a given directory.
+   - If the directory does not exist, it is added to the database with a visit count of **1**.
+
+- **`get_top_directory(search_term)`**:
+   - Searches for the directory that best matches the provided term and is ranked the highest in terms of visits.
+
+- **`list_rankings()`**:
+   - Lists all directories sorted by their visit counts, starting with the most frequently accessed.
+
+- **`get_all_directories()`**:
+   - Retrieves all stored directories sorted by rank.
+
+---
+
+### **Core Functions**
+
+- **`change_directory(target_directory)`**:
+   - Changes to the specified directory if it is valid.
+
+- **`add_directory(directory)`**:
+   - Adds a new directory to the database, initializing its rank.
+
+- **`remove_directory(directory)`**:
+   - Removes the specified directory from the database.
+
+- **`query_directories()`**:
+   - Displays all stored directories for easy review.
+
+- **`jump_to_directory(keyword)`**:
+   - Finds the best matching directory based on a search keyword, ranks it, and "jumps" to it.
+
+---
+
+## 🎮 **Usage Guide**
+
+### **Command Line Usage**
+
+The tool supports the following commands, each performing a specific action:
+
+#### 1. **Add a Directory**  
 ```bash
-# Add a directory
-python clitools.py add "C:\\Users\\Suyash"
-
-# Remove a directory
-python clitools.py remove "C:\\Users\\Suyash"
-
-# List all directories
-python clitools.py query
-
-# Jump to a directory based on a keyword
-python clitools.py jump "Suyash"
-
-# List all rankings (sorted by visits)
-python clitools.py list-rankings
+python clitools.py add /path/to/directory
